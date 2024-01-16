@@ -187,7 +187,7 @@ Text
 <pre><code>pdflatex путь_к_файлу
 </code></pre>
 <p>Вместо <code>путь_к_файлу</code> нужно указать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилироуказать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилированный .pdf файл.<br />
-<img src="/examples/2_1.png" alt="Пример 1" />
+<img src="examples/2_1.png" alt="Пример 1" />
 Видим, что документ получился красивым и страница пронумерована. Теперь попробуйте заменить &quot;Text&quot; в коде выше на что-то на кириллице:</p>
 <pre><code class="language-latex">\documentclass{article}
 \begin{document}
@@ -200,7 +200,7 @@ Text
                not set up for use with LaTeX.
 </code></pre>
 <p>Это происходит потому, что LaTeX по умолчанию не поддерживает русский язык, и чтобы добавить поддержку русского языка нужно включить в документ пакет <em>babel</em>, точнее нужные нам поддерживаемые языки оттуда. Для этого после <code>\documentclass{article}</code> добавим строку <code>\usepackage[english,russian]{babel}</code> и попробуем скомпилировать документ снова.<br />
-<img src="/examples/2_2.png" alt="Пример 2" />
+<img src="examples/2_2.png" alt="Пример 2" />
 Ура! Всё получилось. Теперь давайте попробуем разобраться в синтаксисе шаблона документа:</p>
 <pre><code class="language-latex">\documentclass{article}
 \usepackage[english,russian]{babel}
@@ -243,22 +243,6 @@ Text
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

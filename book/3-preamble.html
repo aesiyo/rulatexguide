@@ -203,7 +203,7 @@
 </code></pre>
 <p><em>Знак <code>%</code> используется в LaTeX документах для добавления комментариев к коду, т.е. код после знака процента выполняться не будет. Аналоги в языках программирования: <code>Python:#; Java,C(++),многие_другие://; Lisp:;</code></em>
 Результат:
-<img src="/examples/3_1.png" alt="Пример 1" />
+<img src="examples/3_1.png" alt="Пример 1" />
 Как видим, в документе появились заголовок, автор и дата создания документа. Но они не очень красиво расположены. Документ выглядит лучше, когда заголовок расположен на отдельной странице. Чтобы прервать страницу после окончания заголовка, нужно добавить строку <code>\newpage</code> сразу после <code>\maketitle</code>, очевидно почему:</p>
 <pre><code class="language-latex">\documentclass{article}
 \usepackage[english,russian]{babel}
@@ -225,16 +225,14 @@
 \end{document}
 </code></pre>
 <p>Результат:
-<img src="/examples/3_2.png" alt="Пример 2" />
+<img src="examples/3_2.png" alt="Пример 2" />
 Даже страницы автоматически пронумеровались. Также здесь автоматически нумеруются главы и многое другое, это как раз одно из преимуществ LaTeX над такими текстовыми процессорами, как Word. Можно приступать к оглавлению</p>
 <h2 id="Оглавление"><a class="header" href="#Оглавление">Оглавление</a></h2>
 <p>Обычно LaTeX автоматически создаёт оглавление основываясь на главах в документе. Давайте просто для примера вставим перед текстом следующие строки:</p>
-<pre><code class="language-latex">\chapter{Паровоз}
-\section{Один}
+<pre><code class="language-latex">\section{Один}
 \section{Два}
-\chapter{Карандаш}
 </code></pre>
-<p>Это введено для примера того, как работает оглавление. Более подробно команды chapter и section будут рассмотрены в следующих параграфах, пока это знать не обязательно.<br />
+<p>Это введено для примера чтобы показать, как работает оглавление. Более подробно команды chapter, section и другие будут рассмотрены в следующих параграфах, пока это знать не обязательно.<br />
 Далее нужно создать само оглавление для фрагмента выше, добавив в LaTeX код команду \tableofcontents{} как в примере ниже:</p>
 <pre><code class="language-latex">\documentclass{article}
 \usepackage[english,russian]{babel}
@@ -255,15 +253,14 @@
 % Оглавление
 \tableofcontents{}
 
-\chapter{Паровоз}
 \section{Один}
 \section{Два}
-\chapter{Карандаш}
 
 Текст
 \end{document}
 </code></pre>
-<p><a href="/exapmles/3_1.pdf">Получившийся pdf файл</a></p>
+<p><img src="exapmles/3_3.png" alt="Пример 3" />
+И снова всё получилось. В следующих параграфах будут рассмотрены другие темы.</p>
 
                     </main>
 
@@ -288,22 +285,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

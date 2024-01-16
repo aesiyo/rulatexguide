@@ -184,9 +184,9 @@
 Ниже будут показаны примеры установки базовых инструментов для работы с LaTeX в текстовом редакторе.</p>
 <h2 id="Если-Вы-используете-операционную-систему-windows"><a class="header" href="#Если-Вы-используете-операционную-систему-windows">Если Вы используете операционную систему Windows</a></h2>
 <p>Для ОС Windows рекомендуется установить <a href="https://www.tug.org/texlive/windows.html">TeXLive</a> (файл <em>install-tl-windows.exe</em>) в пункте Easy Install, подсвеченный синим цветом). В процессе установки нет ничего сложного, можно справиться даже без знания английского.<br />
-<img src="/examples/1_1.png" alt="Пример 1" />
-<img src="/examples/1_2.png" alt="Пример 2" />
-<img src="/examples/1_3.png" alt="Пример 3" />
+<img src="examples/1_1.png" alt="Пример 1" />
+<img src="examples/1_2.png" alt="Пример 2" />
+<img src="examples/1_3.png" alt="Пример 3" />
 Обратите внимание: по умолчанию установщик TeXLive предлагает Вам установить графический редактор для TeX/LaTeX <em>TeXWorks</em>, который похож на TeXMaker или TeXStudio. Если он Вам не нужен, уберите галочку почти в самом низу установщика, над панелью с кнопками, как на третьем изображении.<br />
 После применения настроек нажмите <em>Install</em> и установщик автоматически установит все необходимые пакеты.</p>
 <h2 id="Если-Вы-используете-операционную-систему-на-базе-ядра-linux"><a class="header" href="#Если-Вы-используете-операционную-систему-на-базе-ядра-linux">Если Вы используете операционную систему на базе ядра Linux</a></h2>
@@ -238,22 +238,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
