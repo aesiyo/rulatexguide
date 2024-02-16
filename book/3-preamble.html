@@ -90,9 +90,11 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">О сайте</a></li><li class="chapter-item expanded affix "><a href="whylatex.html">Зачем нужен LaTeX</a></li><li class="chapter-item expanded "><a href="1-install_tools.html"><strong aria-hidden="true">1.</strong> Установка необходимых инструментов</a></li><li class="chapter-item expanded "><a href="2-first_doc.html"><strong aria-hidden="true">2.</strong> Создание первого документа</a></li><li class="chapter-item expanded "><a href="3-preamble.html" class="active"><strong aria-hidden="true">3.</strong> Преамбула документа</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">О сайте</a></li><li class="chapter-item expanded affix "><a href="whylatex.html">Зачем нужен LaTeX</a></li><li class="chapter-item expanded "><a href="1-install_tools.html"><strong aria-hidden="true">1.</strong> Установка необходимых инструментов</a></li><li class="chapter-item expanded "><a href="2-first_doc.html"><strong aria-hidden="true">2.</strong> Создание первого документа</a></li><li class="chapter-item expanded "><a href="3-preamble.html" class="active"><strong aria-hidden="true">3.</strong> Преамбула документа</a></li><li class="chapter-item expanded "><a href="4-chapters.html"><strong aria-hidden="true">4.</strong> Разделение текста на главы и разделы</a></li><li class="chapter-item expanded "><a href="5-formation.html"><strong aria-hidden="true">5.</strong> Форматирование текста</a></li><li class="chapter-item expanded "><a href="6-lists.html"><strong aria-hidden="true">6.</strong> Списки</a></li><li class="chapter-item expanded "><a href="7-tables.html"><strong aria-hidden="true">7.</strong> Таблицы</a></li><li class="chapter-item expanded "><a href="8-images.html"><strong aria-hidden="true">8.</strong> Вставка изображений</a></li><li class="chapter-item expanded "><a href="9-resize.html"><strong aria-hidden="true">9.</strong> Изменение размера и расположения элементов</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <!-- Track and set sidebar scroll position -->
@@ -201,7 +203,7 @@
 Текст
 \end{document}
 </code></pre>
-<p><em>Знак <code>%</code> используется в LaTeX документах для добавления комментариев к коду, т.е. код после знака процента выполняться не будет. Аналоги в языках программирования: <code>Python:#; Java,C(++),многие_другие://; Lisp:;</code></em>
+<p><em>Знак <code>%</code> используется в LaTeX документах для добавления комментариев к коду, т.е. код после знака процента выполняться не будет. Аналоги в языках программирования: <code>Python: &quot;#&quot;; Java, C(++), многие другие: &quot;//&quot;, Lisp (Scheme, Clojure, eLisp, Common Lisp и др.): &quot;;;&quot;.</code></em>
 Результат:
 <img src="examples/3_1.png" alt="Пример 1" />
 Как видим, в документе появились заголовок, автор и дата создания документа. Но они не очень красиво расположены. Документ выглядит лучше, когда заголовок расположен на отдельной странице. Чтобы прервать страницу после окончания заголовка, нужно добавить строку <code>\newpage</code> сразу после <code>\maketitle</code>, очевидно почему:</p>
@@ -270,6 +272,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="4-chapters.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -281,6 +286,9 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="4-chapters.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

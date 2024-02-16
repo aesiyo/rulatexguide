@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>blender(1) — blender</title>
+  <link rel="stylesheet" href="https://static.opensuse.org/chameleon-3.0/dist/css/chameleon.css">
+
+  <script defer="" src="https://static.opensuse.org/chameleon-3.0/dist/js/jquery.slim.js"></script>
+  <script defer="" src="https://static.opensuse.org/chameleon-3.0/dist/js/bootstrap.bundle.js"></script>
+  <script defer="" src="https://static.opensuse.org/chameleon-3.0/dist/js/chameleon.js"></script>
+  <style type="text/css">
+  #content {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.panels {
+    order: 2;
+    position: sticky;
+    top: 20px;
+    margin-left: auto;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+}
+
+.paneljump {
+    display: none;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+        flex-direction: column;
+    }
+    .panels {
+        max-height: unset;
+        width: 100%;
+        position: unset;
+    }
+    .paneljump {
+        display: block;
+    }
+}
+
+.card > details > summary {
+    list-style: none;
+}
+
+.breadcrumb-item svg {
+  fill: currentColor;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+    margin-bottom: 20px;
+}
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc, .mandoc pre, .mandoc code {
+    font-family: "Source Code Pro", monospace;
+    font-size: 1.04rem;
+}
+.mandoc pre {
+    white-space: pre-wrap;
+}
+.mandoc {
+    margin-right: 45px;
+
+     
+    overflow: hidden;
+    margin-top: .5em;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+@media print {
+    #header, .footer, .panels, .anchor, .paneljump {
+        display: none;
+    }
+    #content {
+        margin: 0;
+    }
+    .mandoc {
+        margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {    margin-left: 3.8em; }
+
+.Bl-bullet {    list-style-type: disc;
+        padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {  list-style-type: none;
+        padding-left: 0em; }
+.Bl-dash > li:before {
+        content: "\2014  "; }
+.Bl-item {  list-style-type: none;
+        padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+        margin-top: 0em; }
+
+.Bl-enum {  padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+        margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+        font-style: normal;
+        font-weight: bold; }
+.Bl-diag > dd {
+        margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+        margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+        margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+        margin-left: 0em; }
+.Bl-tag {   margin-left: 5.5em; }
+.Bl-tag > dt {
+        float: left;
+        margin-top: 0em;
+        margin-left: -5.5em;
+        padding-right: 1.2em;
+        vertical-align: top; }
+.Bl-tag > dd {
+        clear: both;
+        width: 100%;
+        margin-top: 0em;
+        margin-left: 0em;
+        vertical-align: top;
+        overflow: auto; }
+.Bl-compact > dt {
+        margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+        margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+        margin-top: 0em; }
+
+.Rs {       font-style: normal;
+        font-weight: normal; }
+.RsA { }
+.RsB {      font-style: italic;
+        font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {      font-style: italic;
+        font-weight: normal; }
+.RsJ {      font-style: italic;
+        font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {      text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {       margin-left: 3.8em;
+        text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {   font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+.Fl {       font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+.Cm {       font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+.Ar {       font-style: italic;
+        font-weight: normal; }
+.Op {       display: inline; }
+.Ic {       font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+.Ev {       font-style: normal;
+        font-weight: normal;
+        font-family: monospace; }
+.Pa {       font-style: italic;
+        font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {   font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+a.In { }
+.Fd {       font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+.Ft {       font-style: italic;
+        font-weight: normal; }
+.Fn {       font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+.Fa {       font-style: italic;
+        font-weight: normal; }
+.Vt {       font-style: italic;
+        font-weight: normal; }
+.Va {       font-style: italic;
+        font-weight: normal; }
+.Dv {       font-style: normal;
+        font-weight: normal;
+        font-family: monospace; }
+.Er {       font-style: normal;
+        font-weight: normal;
+        font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {       font-style: normal;
+        font-weight: bold;
+        font-family: inherit; }
+.Ad {       font-style: italic;
+        font-weight: normal; }
+.Ms {       font-style: normal;
+        font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {       display: inline; }
+.No {       font-style: normal;
+        font-weight: normal; }
+.Em {       font-style: italic;
+        font-weight: normal; }
+.Sy {       font-style: normal;
+        font-weight: bold; }
+.Li {       font-style: normal;
+        font-weight: normal;
+        font-family: monospace; }
+
+  </style>
+
+  </head>
+<body>
+    <nav class="navbar noprint navbar-expand-md">
+    <a class="navbar-brand" href="/">
+      <img src="https://static.opensuse.org/favicon.svg" class="d-inline-block align-top" alt="openSUSE" title="openSUSE" width="30" height="30">
+      <span class="navbar-title">Manuals</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+        </path>
+      </svg>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav mr-auto flex-md-shrink-0">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.opensuse.org">
+            openSUSE
+          </a>
+        </li>
+	<li class="nav-item">
+          <a class="nav-link" href="/about.html">
+            About
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/Tumbleweed/index.html">
+            Repository Index
+          </a>
+        </li>
+        
+        </ul>
+      <form class="form-inline mr-md-3" action="/jump" method="get">
+        <div class="input-group">
+          <input class="form-control" type="text" name="q" placeholder="manpage name" required>
+          <input type="hidden" name="suite" value="Tumbleweed">
+          <input type="hidden" name="binarypkg" value="blender">
+          <input type="hidden" name="section" value="1">
+          <input type="hidden" name="language" value="en">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="submit">
+              <svg class="bi bi-arrow" width="1em" height="1em" version="1.1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+               <path d="m7.5 14.5 7-7-7-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1px"/>
+               <path d="m14 7.5h-14" fill="none" stroke="currentColor" stroke-width="1px"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button class="navbar-toggler megamenu-toggler" type="button" data-toggle="collapse" data-target="#megamenu" aria-expanded="true">
+      <svg class="bi bi-grid" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z">
+        </path>
+      </svg>
+    </button>
+  </nav>
+  <div id="megamenu" class="megamenu collapse"></div>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/">
+        <svg width="16px" height="16px" version="1.1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+ <path d="m1 0v2c-0.554 0-1 0.446-1 1s0.446 1 1 1v3c-0.554 0-1 0.446-1 1s0.446 1 1 1v3c-0.554 0-1 0.446-1 1s0.446 1 1 1v2h13c1.108 0 2-0.892 2-2v-12c0-1.108-0.892-2-2-2h-13zm3 1c1.108 0 2 0.892 2 2s-0.892 2-2 2c-0.74277 0-1.3874-0.40192-1.7324-1h1.7324c0.554 0 1-0.446 1-1s-0.446-1-1-1h-1.7324c0.34498-0.59808 0.98965-1 1.7324-1zm4 0h1v0.26562c0.29376-0.16912 0.63536-0.26562 1-0.26562 0.59814 0 1.1341 0.26027 1.5 0.67383 0.3659-0.41356 0.90186-0.67383 1.5-0.67383 1.108 0 2 0.89201 2 2v2h-1v-2c0-0.554-0.44601-1-1-1s-1 0.446-1 1v2h-1v-2c0-0.554-0.44601-1-1-1-0.554 0-1 0.446-1 1v2h-1v-4zm-4 5c1.108 0 2 0.892 2 2s-0.892 2-2 2c-0.74277 0-1.3874-0.40192-1.7324-1h1.7324c0.554 0 1-0.446 1-1s-0.446-1-1-1h-1.7324c0.34498-0.59808 0.98965-1 1.7324-1zm9 0c1.108 0 2 0.89201 2 2v2h-1v-0.26562c-0.29376 0.16912-0.63536 0.26562-1 0.26562-1.108 0-2-0.89201-2-2s0.892-2 2-2zm0 1c-0.554 0-1 0.446-1 1s0.446 1 1 1c0.554 0 1-0.446 1-1s-0.446-1-1-1zm-9 4c1.108 0 2 0.892 2 2s-0.892 2-2 2c-0.74277 0-1.3874-0.40192-1.7324-1h1.7324c0.554 0 1-0.446 1-1s-0.446-1-1-1h-1.7324c0.34498-0.59808 0.98965-1 1.7324-1zm7 0h1v0.26562c0.29376-0.16912 0.63536-0.26562 1-0.26562 1.108 0 2 0.89201 2 2v2h-1v-2c0-0.55399-0.44601-1-1-1-0.554 0-1 0.44601-1 1v2h-1v-4z"/>
+</svg>
+ Manuals
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="/Tumbleweed/index.html">Tumbleweed</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><a href="/Tumbleweed/blender/index.html">blender</a></li>
+    
+    
+    
+    <li class="breadcrumb-item active">blender(1)</li>
+    
+    </ol>
+  <main class="flex-fill">
+
+    <div id="content" class="container">
+
+
+<div class="panels" id="panels">
+  <div class="card mb-2" role="complementary">
+    <div class="card-header" role="heading">
+      links
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="/Tumbleweed/blender/blender.1">language-indep link</a>
+      </li>
+      <li class="list-group-item">
+        <a href="/Tumbleweed/blender/blender.1.en.gz">raw man page</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card mb-2" role="complementary">
+    <details>
+      <summary>
+        <div class="card-header dropdown-toggle">
+          table of contents
+        </div>
+      </summary>
+      <ul class="list-group list-group-flush">
+        
+        <li class="list-group-item">
+          <a class="toclink" href="#NAME" title="NAME">NAME</a>
+        </li>
+        
+        <li class="list-group-item">
+          <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+        </li>
+        
+        <li class="list-group-item">
+          <a class="toclink" href="#DESCRIPTION" title="DESCRIPTION">DESCRIPTION</a>
+        </li>
+        
+        <li class="list-group-item">
+          <a class="toclink" href="#OPTIONS" title="OPTIONS">OPTIONS</a>
+        </li>
+        
+        <li class="list-group-item">
+          <a class="toclink" href="#ENVIRONMENT_VARIABLES" title="ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a>
+        </li>
+        
+        <li class="list-group-item">
+          <a class="toclink" href="#SEE_ALSO" title="SEE ALSO">SEE ALSO</a>
+        </li>
+        
+        <li class="list-group-item">
+          <a class="toclink" href="#AUTHORS" title="AUTHORS">AUTHORS</a>
+        </li>
+        
+      </ul>
+    </details>
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">BLENDER(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">BLENDER(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+<p class="Pp">blender - a full-featured 3D application</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<p class="Pp"><b>blender [args ...] [file] [args ...]</b></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION">DESCRIPTION<a class="anchor" href="#DESCRIPTION">¶</a></h1>
+<p class="Pp"><b>blender</b> is a full-featured 3D application. It supports the
+    entirety of the 3D pipeline - modeling, rigging, animation, simulation,
+    rendering, compositing, motion tracking, and video editing.</p>
+<p class="Pp">Use Blender to create 3D images and animations, films and
+    commercials, content for games, architectural and industrial visualizations,
+    and scientific visualizations.</p>
+<p class="Pp"><a href="https://www.blender.org">https://www.blender.org</a></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="OPTIONS">OPTIONS<a class="anchor" href="#OPTIONS">¶</a></h1>
+<p class="Pp">Color management: using fallback mode for management Blender 3.6.2
+    Usage: blender [args ...] [file] [args ...]
+  <br/>
+</p>
+<section class="Ss">
+<h2 class="Ss" id="Render_Options:">Render Options:<a class="anchor" href="#Render_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="b"><a class="permalink" href="#b"><b>-b or --background</b></a></dt>
+  <dd>
+    <br/>
+    Run in background (often used for UI-less rendering).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="a"><a class="permalink" href="#a"><b>-a or --render-anim</b></a></dt>
+  <dd>
+    <br/>
+    Render frames from start to end (inclusive).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="S"><a class="permalink" href="#S"><b>-S or --scene
+    &lt;name&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set the active scene &lt;name&gt; for rendering.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="f"><a class="permalink" href="#f"><b>-f or --render-frame
+    &lt;frame&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Render frame &lt;frame&gt; and save it.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>* +&lt;frame&gt; start frame relative, -&lt;frame&gt; end frame relative.
+    <br/>
+    * A comma separated list of frames can also be used (no spaces).
+    <br/>
+    * A range of frames can be expressed using &#39;..&#39; separator between the first
+      and last frames (inclusive).
+    <p class="Pp"></p>
+  </dd>
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="s"><a class="permalink" href="#s"><b>-s or --frame-start
+    &lt;frame&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set start to frame &lt;frame&gt;, supports +/- for relative frames too.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="e"><a class="permalink" href="#e"><b>-e or --frame-end
+    &lt;frame&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set end to frame &lt;frame&gt;, supports +/- for relative frames too.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="j"><a class="permalink" href="#j"><b>-j or --frame-jump
+    &lt;frames&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set number of frames to step forward after each rendered frame.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="o"><a class="permalink" href="#o"><b>-o or --render-output
+    &lt;path&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set the render path and file name.
+    <br/>
+    Use &#39;//&#39; at the start of the path to render relative to the blend-file.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>The &#39;#&#39; characters are replaced by the frame number, and used to define
+      zero padding.
+    <p class="Pp"></p>
+  </dd>
+  <dt></dt>
+  <dd>* &#39;animation_##_test.png&#39; becomes &#39;animation_01_test.png&#39;
+    <br/>
+    * &#39;test-######.png&#39; becomes &#39;test-000001.png&#39;
+    <p class="Pp"></p>
+  </dd>
+  <dt></dt>
+  <dd>When the filename does not contain &#39;#&#39;, The suffix &#39;####&#39; is added to the
+      filename.
+    <p class="Pp"></p>
+  </dd>
+  <dt></dt>
+  <dd>The frame number will be added at the end of the filename, eg:
+    <br/>
+    # blender -b animation.blend -o //render_ -F PNG -x 1 -a
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="E"><a class="permalink" href="#E"><b>-E or --engine
+    &lt;engine&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Specify the render engine.
+    <br/>
+    Use &#39;-E help&#39; to list available engines.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="t"><a class="permalink" href="#t"><b>-t or --threads
+    &lt;threads&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Use amount of &lt;threads&gt; for rendering and other operations
+    <br/>
+    [1-1024], 0 for systems processor count.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Format_Options:">Format Options:<a class="anchor" href="#Format_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="F"><a class="permalink" href="#F"><b>-F or --render-format
+    &lt;format&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set the render format.
+    <br/>
+    Valid options are:
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Formats that can be compiled into Blender, not available on all systems:
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="x"><a class="permalink" href="#x"><b>-x or --use-extension
+    &lt;bool&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set option to add the file extension to the end of the file.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Animation_Playback_Options:">Animation Playback Options:<a class="anchor" href="#Animation_Playback_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="a~2"><a class="permalink" href="#a~2"><b>-a &lt;options&gt;
+    &lt;file(s)&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Instead of showing Blender&#39;s user interface, this runs Blender as an
+      animation player,
+    <br/>
+    to view movies and image sequences rendered in Blender (ignored if &#39;-b&#39; is
+      set).
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Playback Arguments:
+    <p class="Pp"></p>
+  </dd>
+  <dt></dt>
+  <dd>-p &lt;sx&gt; &lt;sy&gt;
+    <br/>
+     Open with lower left corner at &lt;sx&gt;, &lt;sy&gt;.
+    <br/>
+    -m
+    <br/>
+     Read from disk (Do not buffer).
+    <br/>
+    -f &lt;fps&gt; &lt;fps-base&gt;
+    <br/>
+     Specify FPS to start with.
+    <br/>
+    -j &lt;frame&gt;
+    <br/>
+     Set frame step to &lt;frame&gt;.
+    <br/>
+    -s &lt;frame&gt;
+    <br/>
+     Play from &lt;frame&gt;.
+    <br/>
+    -e &lt;frame&gt;
+    <br/>
+     Play until &lt;frame&gt;.
+    <br/>
+    -c &lt;cache_memory&gt;
+    <br/>
+     Amount of memory in megabytes to allow for caching images during playback.
+    <br/>
+     Zero disables (clamping to a fixed number of frames instead).
+    <p class="Pp"></p>
+  </dd>
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Window_Options:">Window Options:<a class="anchor" href="#Window_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="w"><a class="permalink" href="#w"><b>-w or
+    --window-border</b></a></dt>
+  <dd>
+    <br/>
+    Force opening with borders.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="W"><a class="permalink" href="#W"><b>-W or
+    --window-fullscreen</b></a></dt>
+  <dd>
+    <br/>
+    Force opening in fullscreen mode.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="p"><a class="permalink" href="#p"><b>-p or --window-geometry
+    &lt;sx&gt; &lt;sy&gt; &lt;w&gt; &lt;h&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Open with lower left corner at &lt;sx&gt;, &lt;sy&gt; and width and height
+      as &lt;w&gt;, &lt;h&gt;.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="M"><a class="permalink" href="#M"><b>-M or
+    --window-maximized</b></a></dt>
+  <dd>
+    <br/>
+    Force opening maximized.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="con"><a class="permalink" href="#con"><b>-con or
+    --start-console</b></a></dt>
+  <dd>
+    <br/>
+    Start with the console window open (ignored if &#39;-b&#39; is set), (Windows only).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="no"><a class="permalink" href="#no"><b>--no-native-pixels</b></a></dt>
+  <dd>
+    <br/>
+    Do not use native pixel size, for high resolution displays (MacBook
+      &#39;Retina&#39;).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="no~2"><a class="permalink" href="#no~2"><b>--no-window-focus</b></a></dt>
+  <dd>
+    <br/>
+    Open behind other windows and without taking focus.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Python_Options:">Python Options:<a class="anchor" href="#Python_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="y"><a class="permalink" href="#y"><b>-y or
+    --enable-autoexec</b></a></dt>
+  <dd>
+    <br/>
+    Enable automatic Python script execution.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="Y"><a class="permalink" href="#Y"><b>-Y or
+    --disable-autoexec</b></a></dt>
+  <dd>
+    <br/>
+    Disable automatic Python script execution (pydrivers &amp; startup scripts),
+      (default).
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="P"><a class="permalink" href="#P"><b>-P or --python
+    &lt;filepath&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Run the given Python script file.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="python"><a class="permalink" href="#python"><b>--python-text
+    &lt;name&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Run the given Python script text block.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="python~2"><a class="permalink" href="#python~2"><b>--python-expr
+    &lt;expression&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Run the given expression as a Python script.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="python~3"><a class="permalink" href="#python~3"><b>--python-console</b></a></dt>
+  <dd>
+    <br/>
+    Run Blender with an interactive console.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="python~4"><a class="permalink" href="#python~4"><b>--python-exit-code
+    &lt;code&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set the exit-code in [0..255] to exit if a Python exception is raised
+    <br/>
+    (only for scripts executed from the command line), zero disables.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="python~5"><a class="permalink" href="#python~5"><b>--python-use-system-env</b></a></dt>
+  <dd>
+    <br/>
+    Allow Python to use system environment variables such as &#39;PYTHONPATH&#39; and
+      the user site-packages directory.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="addons"><a class="permalink" href="#addons"><b>--addons
+    &lt;addon(s)&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Comma separated list (no spaces) of add-ons to enable in addition to any
+      default add-ons.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Logging_Options:">Logging Options:<a class="anchor" href="#Logging_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="log"><a class="permalink" href="#log"><b>--log
+    &lt;match&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Enable logging categories, taking a single comma separated argument.
+    <br/>
+    Multiple categories can be matched using a &#39;.*&#39; suffix,
+    <br/>
+    so &#39;--log &#34;wm.*&#34;&#39; logs every kind of window-manager message.
+    <br/>
+    Sub-string can be matched using a &#39;*&#39; prefix and suffix,
+    <br/>
+    so &#39;--log &#34;*undo*&#34;&#39; logs every kind of undo-related message.
+    <br/>
+    Use &#34;^&#34; prefix to ignore, so &#39;--log &#34;*,^wm.operator.*&#34;&#39;
+      logs all except for &#39;wm.operators.*&#39;
+    <br/>
+    Use &#34;*&#34; to log everything.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="log~2"><a class="permalink" href="#log~2"><b>--log-level
+    &lt;level&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set the logging verbosity level (higher for more details) defaults to 1,
+    <br/>
+    use -1 to log all levels.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="log~3"><a class="permalink" href="#log~3"><b>--log-show-basename</b></a></dt>
+  <dd>
+    <br/>
+    Only show file name in output (not the leading path).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="log~4"><a class="permalink" href="#log~4"><b>--log-show-backtrace</b></a></dt>
+  <dd>
+    <br/>
+    Show a back trace for each log message (debug builds only).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="log~5"><a class="permalink" href="#log~5"><b>--log-show-timestamp</b></a></dt>
+  <dd>
+    <br/>
+    Show a timestamp for each log message in seconds since start.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="log~6"><a class="permalink" href="#log~6"><b>--log-file
+    &lt;filepath&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set a file to output the log to.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Debug_Options:">Debug Options:<a class="anchor" href="#Debug_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="d"><a class="permalink" href="#d"><b>-d or --debug</b></a></dt>
+  <dd>
+    <br/>
+    Turn debugging on.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>* Enables memory error detection
+    <br/>
+    * Disables mouse grab (to interact with a debugger in some cases)
+    <br/>
+    * Keeps Python&#39;s &#39;sys.stdin&#39; rather than setting it to None
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="debug"><a class="permalink" href="#debug"><b>--debug-value
+    &lt;value&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set debug value of &lt;value&gt; on startup.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="debug~2"><a class="permalink" href="#debug~2"><b>--debug-events</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for the event system.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~3"><a class="permalink" href="#debug~3"><b>--debug-ffmpeg</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages from FFmpeg library.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~4"><a class="permalink" href="#debug~4"><b>--debug-handlers</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for event handling.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~5"><a class="permalink" href="#debug~5"><b>--debug-libmv</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages from libmv library.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~6"><a class="permalink" href="#debug~6"><b>--debug-cycles</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages from Cycles.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~7"><a class="permalink" href="#debug~7"><b>--debug-memory</b></a></dt>
+  <dd>
+    <br/>
+    Enable fully guarded memory allocation and debugging.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~8"><a class="permalink" href="#debug~8"><b>--debug-jobs</b></a></dt>
+  <dd>
+    <br/>
+    Enable time profiling for background jobs.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~9"><a class="permalink" href="#debug~9"><b>--debug-python</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for Python.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~10"><a class="permalink" href="#debug~10"><b>--debug-depsgraph</b></a></dt>
+  <dd>
+    <br/>
+    Enable all debug messages from dependency graph.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~11"><a class="permalink" href="#debug~11"><b>--debug-depsgraph-eval</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages from dependency graph related on evaluation.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~12"><a class="permalink" href="#debug~12"><b>--debug-depsgraph-build</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages from dependency graph related on graph construction.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~13"><a class="permalink" href="#debug~13"><b>--debug-depsgraph-tag</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages from dependency graph related on tagging.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~14"><a class="permalink" href="#debug~14"><b>--debug-depsgraph-no-threads</b></a></dt>
+  <dd>
+    <br/>
+    Switch dependency graph to a single threaded evaluation.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~15"><a class="permalink" href="#debug~15"><b>--debug-depsgraph-time</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages from dependency graph related on timing.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~16"><a class="permalink" href="#debug~16"><b>--debug-depsgraph-pretty</b></a></dt>
+  <dd>
+    <br/>
+    Enable colors for dependency graph debug messages.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~17"><a class="permalink" href="#debug~17"><b>--debug-depsgraph-uuid</b></a></dt>
+  <dd>
+    <br/>
+    Verify validness of session-wide identifiers assigned to ID datablocks.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~18"><a class="permalink" href="#debug~18"><b>--debug-ghost</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for Ghost (Linux only).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~19"><a class="permalink" href="#debug~19"><b>--debug-wintab</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for Wintab.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~20"><a class="permalink" href="#debug~20"><b>--debug-gpu</b></a></dt>
+  <dd>
+    <br/>
+    Enable GPU debug context and information for OpenGL 4.3+.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~21"><a class="permalink" href="#debug~21"><b>--debug-gpu-force-workarounds</b></a></dt>
+  <dd>
+    <br/>
+    Enable workarounds for typical GPU issues and disable all GPU extensions.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~22"><a class="permalink" href="#debug~22"><b>--debug-gpu-disable-ssbo</b></a></dt>
+  <dd>
+    <br/>
+    Disable usage of shader storage buffer objects.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~23"><a class="permalink" href="#debug~23"><b>--debug-wm</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for the window manager, shows all operators in search,
+      shows keymap errors.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~24"><a class="permalink" href="#debug~24"><b>--debug-all</b></a></dt>
+  <dd>
+    <br/>
+    Enable all debug messages.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~25"><a class="permalink" href="#debug~25"><b>--debug-io</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for I/O (Collada, ...).
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="debug~26"><a class="permalink" href="#debug~26"><b>--debug-fpe</b></a></dt>
+  <dd>
+    <br/>
+    Enable floating-point exceptions.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="debug~27"><a class="permalink" href="#debug~27"><b>--debug-exit-on-error</b></a></dt>
+  <dd>
+    <br/>
+    Immediately exit when internal errors are detected.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="disable"><a class="permalink" href="#disable"><b>--disable-crash-handler</b></a></dt>
+  <dd>
+    <br/>
+    Disable the crash handler.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="disable~2"><a class="permalink" href="#disable~2"><b>--disable-abort-handler</b></a></dt>
+  <dd>
+    <br/>
+    Disable the abort handler.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="verbose"><a class="permalink" href="#verbose"><b>--verbose
+    &lt;verbose&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set the logging verbosity level for debug messages that support it.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="GPU_Options:">GPU Options:<a class="anchor" href="#GPU_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="gpu"><a class="permalink" href="#gpu"><b>--gpu-backend</b></a></dt>
+  <dd>
+    <br/>
+    Force to use a specific GPU backend. Valid options: &#39;opengl&#39;.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Misc_Options:">Misc Options:<a class="anchor" href="#Misc_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="open"><a class="permalink" href="#open"><b>--open-last</b></a></dt>
+  <dd>
+    <br/>
+    Open the most recently opened blend file, instead of the default startup
+      file.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="app"><a class="permalink" href="#app"><b>--app-template
+    &lt;template&gt;</b></a></dt>
+  <dd>
+    <br/>
+    Set the application template (matching the directory name), use &#39;default&#39;
+      for none.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="factory"><a class="permalink" href="#factory"><b>--factory-startup</b></a></dt>
+  <dd>
+    <br/>
+    Skip reading the BLENDER_STARTUP_FILE in the users home directory.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="enable"><a class="permalink" href="#enable"><b>--enable-event-simulate</b></a></dt>
+  <dd>
+    <br/>
+    Enable event simulation testing feature &#39;bpy.types.Window.event_simulate&#39;.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="env"><a class="permalink" href="#env"><b>--env-system-datafiles</b></a></dt>
+  <dd>
+    <br/>
+    Set the BLENDER_SYSTEM_DATAFILES environment variable.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="env~2"><a class="permalink" href="#env~2"><b>--env-system-scripts</b></a></dt>
+  <dd>
+    <br/>
+    Set the BLENDER_SYSTEM_SCRIPTS environment variable.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="env~3"><a class="permalink" href="#env~3"><b>--env-system-python</b></a></dt>
+  <dd>
+    <br/>
+    Set the BLENDER_SYSTEM_PYTHON environment variable.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="noaudio"><a class="permalink" href="#noaudio"><b>-noaudio</b></a></dt>
+  <dd>
+    <br/>
+    Force sound system to None.
+    <p class="Pp"></p>
+  </dd>
+  <dt id="setaudio"><a class="permalink" href="#setaudio"><b>-setaudio</b></a></dt>
+  <dd>
+    <br/>
+    Force sound system to a specific device.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt id="h"><a class="permalink" href="#h"><b>-h or --help</b></a></dt>
+  <dd>
+    <br/>
+    Print this help text and exit.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>/?</b></dt>
+  <dd>
+    <br/>
+    Print this help text and exit (Windows only).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="R"><a class="permalink" href="#R"><b>-R</b></a></dt>
+  <dd>
+    <br/>
+    Register blend-file extension, then exit (Windows only).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="r"><a class="permalink" href="#r"><b>-r</b></a></dt>
+  <dd>
+    <br/>
+    Silently register blend-file extension, then exit (Windows only).
+    <p class="Pp"></p>
+  </dd>
+  <dt id="v"><a class="permalink" href="#v"><b>-v or --version</b></a></dt>
+  <dd>
+    <br/>
+    Print Blender version and exit.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--</b></dt>
+  <dd>
+    <br/>
+    End option processing, following arguments passed unchanged. Access via
+      Python&#39;s &#39;sys.argv&#39;.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Other_Options:">Other Options:<a class="anchor" href="#Other_Options:">¶</a></h2>
+<dl class="Bl-tag">
+  <dt id="debug~28"><a class="permalink" href="#debug~28"><b>--debug-freestyle</b></a></dt>
+  <dd>
+    <br/>
+    Enable debug messages for Freestyle.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Argument_Parsing:">Argument Parsing:<a class="anchor" href="#Argument_Parsing:">¶</a></h2>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="	Arguments_must_be_separated_by_white_space,_eg:">	Arguments must be separated by white space, eg:<a class="anchor" href="#%09Arguments_must_be_separated_by_white_space,_eg:">¶</a></h2>
+<br/>
+<p class="Pp"> # blender -ba test.blend
+  <br/>
+   ...will exit since &#39;-ba&#39; is an unknown argument.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Argument_Order:">Argument Order:<a class="anchor" href="#Argument_Order:">¶</a></h2>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="	Arguments_are_executed_in_the_order_they_are_given._eg:">	Arguments are executed in the order they are given. eg:<a class="anchor" href="#%09Arguments_are_executed_in_the_order_they_are_given._eg:">¶</a></h2>
+<br/>
+<p class="Pp"> # blender --background test.blend --render-frame 1
+    --render-output &#39;/tmp&#39;
+  <br/>
+   ...will not render to &#39;/tmp&#39; because &#39;--render-frame 1&#39; renders before the
+    output path is set.
+  <br/>
+   # blender --background --render-output /tmp test.blend --render-frame 1
+  <br/>
+   ...will not render to &#39;/tmp&#39; because loading the blend-file overwrites the
+    render output that was set.
+  <br/>
+   # blender --background test.blend --render-output /tmp --render-frame 1
+  <br/>
+   ...works as expected.</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT_VARIABLES">ENVIRONMENT VARIABLES<a class="anchor" href="#ENVIRONMENT_VARIABLES">¶</a></h1>
+<br/>
+<p class="Pp"> $BLENDER_USER_RESOURCES Top level directory for user files.
+  <br/>
+   (other &#39;BLENDER_USER_*&#39; variables override when set).
+  <br/>
+   $BLENDER_USER_CONFIG Directory for user configuration files.
+  <br/>
+   $BLENDER_USER_SCRIPTS Directory for user scripts.
+  <br/>
+   $BLENDER_USER_DATAFILES Directory for user data files (icons, translations,
+    ..).
+  <br/>
+   $BLENDER_SYSTEM_RESOURCES Top level directory for system files.
+  <br/>
+   (other &#39;BLENDER_SYSTEM_*&#39; variables override when set).
+  <br/>
+   $BLENDER_SYSTEM_SCRIPTS Directory for system wide scripts.
+  <br/>
+   $BLENDER_SYSTEM_DATAFILES Directory for system wide data files.
+  <br/>
+   $BLENDER_SYSTEM_PYTHON Directory for system Python libraries.
+  <br/>
+   $OCIO Path to override the OpenColorIO config file.
+  <br/>
+   $TMP or $TMPDIR Store temporary files here.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO">SEE ALSO<a class="anchor" href="#SEE_ALSO">¶</a></h1>
+<p class="Pp"><b>luxrender(1)</b></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHORS">AUTHORS<a class="anchor" href="#AUTHORS">¶</a></h1>
+<p class="Pp">This manpage was written for a Debian GNU/Linux system by Daniel
+    Mester &lt;mester@uni-bremen.de&gt; and updated by Cyril Brulebois
+    &lt;cyril.brulebois@enst-bretagne.fr&gt; and Dan Eicher
+    &lt;dan@trollwerks.org&gt;.</p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">August 17, 2023</td>
+    <td class="foot-os">Blender 3.6.2</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      
+      <p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+blender.1.en.gz (from blender 3.6.2-1.4)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2023-11-08T22:40:37Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2023-11-11T20:17:47Z
+</td>
+</tr>
+</table>
+</p>
+      
+      <hr>
+      <div class="d-flex justify-content-between">
+        <div class="footer-copyright">
+          © 2022 rpm2docserv contributors
+        </div>
+        <div class="list-inline">
+          <a class="list-inline-item" href="https://github.com/thkukuk/rpm2docserv/">
+            rpm2docserv 20230308.4ed55cf
+          </a>
+          <a class="list-inline-item" href="https://github.com/thkukuk/rpm2docserv/blob/main/LICENSE">
+            License
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Thing","@id":"/Tumbleweed/index.html","name":"Tumbleweed"}},{"@type":"ListItem","position":2,"item":{"@type":"Thing","@id":"/Tumbleweed/blender/index.html","name":"blender"}},{"@type":"ListItem","position":3,"item":{"@type":"Thing","@id":"","name":"blender(1)"}}]}
+</script>

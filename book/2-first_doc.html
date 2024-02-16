@@ -90,9 +90,11 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">О сайте</a></li><li class="chapter-item expanded affix "><a href="whylatex.html">Зачем нужен LaTeX</a></li><li class="chapter-item expanded "><a href="1-install_tools.html"><strong aria-hidden="true">1.</strong> Установка необходимых инструментов</a></li><li class="chapter-item expanded "><a href="2-first_doc.html" class="active"><strong aria-hidden="true">2.</strong> Создание первого документа</a></li><li class="chapter-item expanded "><a href="3-preamble.html"><strong aria-hidden="true">3.</strong> Преамбула документа</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">О сайте</a></li><li class="chapter-item expanded affix "><a href="whylatex.html">Зачем нужен LaTeX</a></li><li class="chapter-item expanded "><a href="1-install_tools.html"><strong aria-hidden="true">1.</strong> Установка необходимых инструментов</a></li><li class="chapter-item expanded "><a href="2-first_doc.html" class="active"><strong aria-hidden="true">2.</strong> Создание первого документа</a></li><li class="chapter-item expanded "><a href="3-preamble.html"><strong aria-hidden="true">3.</strong> Преамбула документа</a></li><li class="chapter-item expanded "><a href="4-chapters.html"><strong aria-hidden="true">4.</strong> Разделение текста на главы и разделы</a></li><li class="chapter-item expanded "><a href="5-formation.html"><strong aria-hidden="true">5.</strong> Форматирование текста</a></li><li class="chapter-item expanded "><a href="6-lists.html"><strong aria-hidden="true">6.</strong> Списки</a></li><li class="chapter-item expanded "><a href="7-tables.html"><strong aria-hidden="true">7.</strong> Таблицы</a></li><li class="chapter-item expanded "><a href="8-images.html"><strong aria-hidden="true">8.</strong> Вставка изображений</a></li><li class="chapter-item expanded "><a href="9-resize.html"><strong aria-hidden="true">9.</strong> Изменение размера и расположения элементов</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <!-- Track and set sidebar scroll position -->
@@ -183,10 +185,12 @@ Text
 </code></pre>
 <p><em>Вы можете ввести любой текст вместо &quot;Text&quot;, но только без использования кириллицы. Далее мы рассмотрим, как включить кириллицу в LaTeX документе.</em><br />
 <br />
-Теперь попробуйте его скомпилировать. Если Вы используете редактор TeXMaker, Вы можете просто нажать на кнопку &quot;Быстрая сборка&quot; на панели инструментов. Если Вы пишете LaTeX код в текстовом редакторе и хотите компилировать самостоятельно, откройте командную строку или терминал и введите следующее:</p>
+Теперь попробуйте его скомпилировать. Если Вы используете редактор TeXMaker, Вы можете просто нажать на кнопку &quot;Быстрая сборка&quot; на панели инструментов. Если Вы пишете LaTeX код в текстовом редакторе и хотите компилировать его самостоятельно, откройте командную строку или терминал и введите следующее:</p>
 <pre><code>pdflatex путь_к_файлу
 </code></pre>
-<p>Вместо <code>путь_к_файлу</code> нужно указать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилироуказать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилированный .pdf файл.<br />
+<p><em>Если Вы используете Windows, командная строка может выдать ошибку, которая говорит о том, что программа pdflatex не найдена. Чтобы это исправить, нужно найти файл pdflatex.exe (например, через меню Пуск или <a href="https://www.voidtools.com/ru-ru/">Everything</a>) и добавить путь к нему в переменную среду PATH (это не очень сложно, см. <a href="https://learn.microsoft.com/ru-ru/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)">https://learn.microsoft.com/ru-ru/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)</a>)</em><br />
+<br />
+Вместо <code>путь_к_файлу</code> нужно указать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилироуказать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилированный .pdf файл.<br />
 <img src="examples/2_1.png" alt="Пример 1" />
 Видим, что документ получился красивым и страница пронумерована. Теперь попробуйте заменить &quot;Text&quot; в коде выше на что-то на кириллице:</p>
 <pre><code class="language-latex">\documentclass{article}
@@ -198,6 +202,8 @@ Text
 Выходит ошибка:</p>
 <pre><code>! LaTeX Error: Unicode character Т (U+0422)
                not set up for use with LaTeX.
+...
+очень много таких же ошибок для каждого кириллического символа
 </code></pre>
 <p>Это происходит потому, что LaTeX по умолчанию не поддерживает русский язык, и чтобы добавить поддержку русского языка нужно включить в документ пакет <em>babel</em>, точнее нужные нам поддерживаемые языки оттуда. Для этого после <code>\documentclass{article}</code> добавим строку <code>\usepackage[english,russian]{babel}</code> и попробуем скомпилировать документ снова.<br />
 <img src="examples/2_2.png" alt="Пример 2" />
@@ -211,7 +217,7 @@ Text
 <p>Можно сразу заметить, что для ввода команд используется символ . Он также используется, когда в тексте нужно ввести какой-то символ, который относится к спецсимволам в LaTeX (<code>{}#$%&amp;^~\_</code>). Например, если Вам нужно ввести знак процента в тексте, его нужно вводить как %, чтобы % не выполнял ту функцию, которую ему присвоили как спецсимволу.<br />
 Команда <code>\documentclass{article}</code> применяет к документу класс <em>article</em>, то есть <em>статья</em>. Это означает, что наш документ является статьёй и LaTeX применит к нему соответствующий шаблон. Также существуют другие классы, такие как <em>proc, minimal, report, book, slides</em>, но в этом учебнике будет использоваться именно article, так как он является наиболее часто используемым.<br />
 С командой <code>\usepackage[...]{...}</code> мы уже разобрались. Можно заметить, что здесь также используются квадратные скобки, здесь они используются для применения конкретных настроек из пакета.
-<code>\begin{document}</code> и <code>\end{document}</code> означают начало и завершение кода документа соответственно, как в языке Pascal.
+<code>\begin{document}</code> и <code>\end{document}</code> означают начало и завершение кода документа соответственно, как в языке Pascal. Это называется &quot;<strong>тело документа</strong>&quot;.
 В следующем параграфе будет рассмотрено создание <em>преамбулы документа</em>.</p>
 
                     </main>

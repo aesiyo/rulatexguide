@@ -91,9 +91,11 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">О сайте</a></li><li class="chapter-item expanded affix "><a href="whylatex.html">Зачем нужен LaTeX</a></li><li class="chapter-item expanded "><a href="1-install_tools.html"><strong aria-hidden="true">1.</strong> Установка необходимых инструментов</a></li><li class="chapter-item expanded "><a href="2-first_doc.html"><strong aria-hidden="true">2.</strong> Создание первого документа</a></li><li class="chapter-item expanded "><a href="3-preamble.html"><strong aria-hidden="true">3.</strong> Преамбула документа</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">О сайте</a></li><li class="chapter-item expanded affix "><a href="whylatex.html">Зачем нужен LaTeX</a></li><li class="chapter-item expanded "><a href="1-install_tools.html"><strong aria-hidden="true">1.</strong> Установка необходимых инструментов</a></li><li class="chapter-item expanded "><a href="2-first_doc.html"><strong aria-hidden="true">2.</strong> Создание первого документа</a></li><li class="chapter-item expanded "><a href="3-preamble.html"><strong aria-hidden="true">3.</strong> Преамбула документа</a></li><li class="chapter-item expanded "><a href="4-chapters.html"><strong aria-hidden="true">4.</strong> Разделение текста на главы и разделы</a></li><li class="chapter-item expanded "><a href="5-formation.html"><strong aria-hidden="true">5.</strong> Форматирование текста</a></li><li class="chapter-item expanded "><a href="6-lists.html"><strong aria-hidden="true">6.</strong> Списки</a></li><li class="chapter-item expanded "><a href="7-tables.html"><strong aria-hidden="true">7.</strong> Таблицы</a></li><li class="chapter-item expanded "><a href="8-images.html"><strong aria-hidden="true">8.</strong> Вставка изображений</a></li><li class="chapter-item expanded "><a href="9-resize.html"><strong aria-hidden="true">9.</strong> Изменение размера и расположения элементов</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <!-- Track and set sidebar scroll position -->
@@ -242,10 +244,12 @@ Text
 </code></pre>
 <p><em>Вы можете ввести любой текст вместо &quot;Text&quot;, но только без использования кириллицы. Далее мы рассмотрим, как включить кириллицу в LaTeX документе.</em><br />
 <br />
-Теперь попробуйте его скомпилировать. Если Вы используете редактор TeXMaker, Вы можете просто нажать на кнопку &quot;Быстрая сборка&quot; на панели инструментов. Если Вы пишете LaTeX код в текстовом редакторе и хотите компилировать самостоятельно, откройте командную строку или терминал и введите следующее:</p>
+Теперь попробуйте его скомпилировать. Если Вы используете редактор TeXMaker, Вы можете просто нажать на кнопку &quot;Быстрая сборка&quot; на панели инструментов. Если Вы пишете LaTeX код в текстовом редакторе и хотите компилировать его самостоятельно, откройте командную строку или терминал и введите следующее:</p>
 <pre><code>pdflatex путь_к_файлу
 </code></pre>
-<p>Вместо <code>путь_к_файлу</code> нужно указать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилироуказать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилированный .pdf файл.<br />
+<p><em>Если Вы используете Windows, командная строка может выдать ошибку, которая говорит о том, что программа pdflatex не найдена. Чтобы это исправить, нужно найти файл pdflatex.exe (например, через меню Пуск или <a href="https://www.voidtools.com/ru-ru/">Everything</a>) и добавить путь к нему в переменную среду PATH (это не очень сложно, см. <a href="https://learn.microsoft.com/ru-ru/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)">https://learn.microsoft.com/ru-ru/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)</a>)</em><br />
+<br />
+Вместо <code>путь_к_файлу</code> нужно указать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилироуказать путь к Вашему .tex файлу, который Вы хотите скомпилировать. После успешной компиляции, pdflatex выведет информацию о том, где находится скомпилированный .pdf файл.<br />
 <img src="examples/2_1.png" alt="Пример 1" />
 Видим, что документ получился красивым и страница пронумерована. Теперь попробуйте заменить &quot;Text&quot; в коде выше на что-то на кириллице:</p>
 <pre><code class="language-latex">\documentclass{article}
@@ -257,6 +261,8 @@ Text
 Выходит ошибка:</p>
 <pre><code>! LaTeX Error: Unicode character Т (U+0422)
                not set up for use with LaTeX.
+...
+очень много таких же ошибок для каждого кириллического символа
 </code></pre>
 <p>Это происходит потому, что LaTeX по умолчанию не поддерживает русский язык, и чтобы добавить поддержку русского языка нужно включить в документ пакет <em>babel</em>, точнее нужные нам поддерживаемые языки оттуда. Для этого после <code>\documentclass{article}</code> добавим строку <code>\usepackage[english,russian]{babel}</code> и попробуем скомпилировать документ снова.<br />
 <img src="examples/2_2.png" alt="Пример 2" />
@@ -270,7 +276,7 @@ Text
 <p>Можно сразу заметить, что для ввода команд используется символ . Он также используется, когда в тексте нужно ввести какой-то символ, который относится к спецсимволам в LaTeX (<code>{}#$%&amp;^~\_</code>). Например, если Вам нужно ввести знак процента в тексте, его нужно вводить как %, чтобы % не выполнял ту функцию, которую ему присвоили как спецсимволу.<br />
 Команда <code>\documentclass{article}</code> применяет к документу класс <em>article</em>, то есть <em>статья</em>. Это означает, что наш документ является статьёй и LaTeX применит к нему соответствующий шаблон. Также существуют другие классы, такие как <em>proc, minimal, report, book, slides</em>, но в этом учебнике будет использоваться именно article, так как он является наиболее часто используемым.<br />
 С командой <code>\usepackage[...]{...}</code> мы уже разобрались. Можно заметить, что здесь также используются квадратные скобки, здесь они используются для применения конкретных настроек из пакета.
-<code>\begin{document}</code> и <code>\end{document}</code> означают начало и завершение кода документа соответственно, как в языке Pascal.
+<code>\begin{document}</code> и <code>\end{document}</code> означают начало и завершение кода документа соответственно, как в языке Pascal. Это называется &quot;<strong>тело документа</strong>&quot;.
 В следующем параграфе будет рассмотрено создание <em>преамбулы документа</em>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="Преамбула-документа"><a class="header" href="#Преамбула-документа">Преамбула документа</a></h1>
 <hr />
@@ -300,7 +306,7 @@ Text
 Текст
 \end{document}
 </code></pre>
-<p><em>Знак <code>%</code> используется в LaTeX документах для добавления комментариев к коду, т.е. код после знака процента выполняться не будет. Аналоги в языках программирования: <code>Python:#; Java,C(++),многие_другие://; Lisp:;</code></em>
+<p><em>Знак <code>%</code> используется в LaTeX документах для добавления комментариев к коду, т.е. код после знака процента выполняться не будет. Аналоги в языках программирования: <code>Python: &quot;#&quot;; Java, C(++), многие другие: &quot;//&quot;, Lisp (Scheme, Clojure, eLisp, Common Lisp и др.): &quot;;;&quot;.</code></em>
 Результат:
 <img src="examples/3_1.png" alt="Пример 1" />
 Как видим, в документе появились заголовок, автор и дата создания документа. Но они не очень красиво расположены. Документ выглядит лучше, когда заголовок расположен на отдельной странице. Чтобы прервать страницу после окончания заголовка, нужно добавить строку <code>\newpage</code> сразу после <code>\maketitle</code>, очевидно почему:</p>
@@ -360,6 +366,455 @@ Text
 </code></pre>
 <p><img src="examples/3_3.png" alt="Пример 3" />
 И снова всё получилось. В следующих параграфах будут рассмотрены другие темы.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Разделение-текста-на-главы-и-разделы"><a class="header" href="#Разделение-текста-на-главы-и-разделы">Разделение текста на главы и разделы</a></h1>
+<hr />
+<p>В прошлом параграфе было рассмотрено создание оглавления на основе существующих глав, но как создавать эти главы, подробно рассказано не было. В этом параграфе разделение текста на главы и разделы будет рассмотрено более подробно.</p>
+<h2 id="Создание-глав"><a class="header" href="#Создание-глав">Создание глав</a></h2>
+<p>Вообще, класс <em>article</em> в LaTeX не поддерживает создание глав, здесь можно создавать только разделы, подразделы и параграфы, поэтому здесь будем считать, что раздел -- глава, а подраздел -- раздел главы. Если Вы выбрали класс документа <em>book</em>, то Вы можете создавать настоящие главы на примере следующего кода:</p>
+<pre><code class="language-latex">\section{название_главы}
+% Содержание главы
+</code></pre>
+<p>А выглядит это примерно так:
+<img src="https://latex-tutorial.com/wp-content/uploads/2022/01/default.webp" alt="chapter_example" /></p>
+<p>А теперь рассмотрим способ создания разделов и подразделов в документе с классом <em>article</em> на примере LaTeX-кода из предыдущих параграфов:</p>
+<pre><code>\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Указание заголовка, авторства и даты создания документа
+\author{Иван Иванов}
+\title{Мой первый \LaTeX документ}
+\date{\today} % \today -- сегодняшняя дата, можно заменить на любую другую.
+
+\begin{document}
+
+% Добавление заголовка в документ
+\maketitle
+
+% Разделение страницы
+\newpage
+
+% Оглавление
+\tableofcontents{}
+\newpage
+
+% Первая и вторая глава
+\section{Первая глава (раздел)}
+Какой-то текст
+\section{Вторая глава}
+Другой текст
+\subsection{Раздел (подраздел)}
+Самый важный текст
+\end{document}
+</code></pre>
+<p>Так выглядят страницы 2 и 3 документа (первая страница -- название документа, авторство и т.д.):
+<img src="examples/4_1.png" alt="Пример 1" />
+Команды <code>\section{...}</code> и <code>\subsection{...}</code> создают разделы и подразделы соответственно. На изображении выше показано, как выглядят секции и подсекции. Вы можете добавлять и подразделы для подразделов, просто добавив ещё одну приставку sub:</p>
+<pre><code class="language-latex">\subsubsection{Подраздел подраздела}
+</code></pre>
+<p>Приставки sub можно добавлять в неограниченном количестве.<br />
+Важно заметить, что в фигурных скобках также нельзя вводить спецсимволы, перечисленные во втором параграфе.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Форматирование-текста"><a class="header" href="#Форматирование-текста">Форматирование текста</a></h1>
+<hr />
+<p>Для того, чтобы сделать текст полужирным, подчёркнутым, под наклоном, нужно запомнить несколько комманд:</p>
+<pre><code class="language-latex">% Полужирный
+\textbf{текст}
+
+% Текст под наклоном (italic)
+\textit{текст}
+
+% Подчёркнутый
+\underline{текст}
+
+% Дополнительно: выделение какого-то текста
+\emph{текст}
+</code></pre>
+<p>Команда <code>emph</code> (от слова emphasis -- акцент) добавляет наклон какому-то фрагменту в тексте, если весь текст не находится под наклоном, или наоборот убирает наклон, если весь текст находится под наклоном.<br />
+Создадим новый LaTeX документ для того, чтобы продемонстрировать работу вышеперечисленных команд:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+\textbf{Сяпала Калуша с калушатами по напушке и увазила Бутявку, и волит:}
+\textit{- Калушата, калушаточки, Бутявка!}
+\underline{Калушата присяпали и бутявку стрямкали. И подудонились.}
+А Калуша \emph{волит}:
+\textit{- Оёё, оёё! \emph{Бутявка}-то некузявая!}
+
+\end{document}
+</code></pre>
+<p>Как выглядит такой текст:
+<img src="examples/5_1.png" alt="Пример 1" />
+Ужас! Строки не переносятся! Что же делать? Для того, чтобы сделать перенос строки, в LaTeX коде нужно либо нажать Enter дважды, либо ввести \\ в конце строки:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+\textbf{Сяпала Калуша с калушатами по напушке и увазила Бутявку, и волит:}
+
+\textit{- Калушата, калушаточки, Бутявка!}
+
+\underline{Калушата присяпали и бутявку стрямкали. И подудонились.}\\
+А Калуша \emph{волит}:\\
+\textit{- Оёё, оёё! \emph{Бутявка}-то некузявая!}
+
+\end{document}
+</code></pre>
+<p><img src="examples/5_2.png" alt="Пример 2" />
+На этом примере можно также увидеть разницу между переносом строки через двойное нажатие Enter и через \\: двойной Enter создаёт новый абзац, а \\ просто переносит строку. Обычно LaTeX переносит строки сам, но бывают случаи, когда слово просто не влезает в документ (как на первом фото) и приходится делать перенос строки вручную.<br />
+Вы также можете применять сразу несколько команд к одному фрагменту текста:</p>
+<pre><code class="language-latex">\textbf{\textit{Бубубубубубу}}
+</code></pre>
+<p><img src="examples/5_3.png" alt="Пример 3" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Списки"><a class="header" href="#Списки">Списки</a></h1>
+<hr />
+<p>Списки бывают беспорядочные и упорядоченные. Отличаются они лишь тем, что слева от беспорядочного элемента списка находится точка, а слева от упорядоченного -- порядковый номер элемента. Для создания списка используются команды <code>\begin{...}</code> и <code>\end{...}</code>, как при создании тела документа. Создадим новый документ по шаблону:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+% Инициализация списка
+\begin{?}
+% Содержимое списка
+...
+
+\end{?}
+
+\end{document}
+</code></pre>
+<p>Чтобы создать список, вместо знака вопроса в шаблоне выше нужно ввести название среды. Для создания беспорядочного списка знак вопроса нужно заменить на <code>itemize</code>, а для создания упорядоченного списка -- на <code>enumerate</code>:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+% Инициализация списков
+\begin{itemize}
+
+...
+
+\end{itemize}
+\begin{enumerate}
+
+...
+
+\end{enumerate}
+\end{document}
+</code></pre>
+<p>Теперь списки нужно заполнить какими-то элементами. Для добавления элемента в список нужно использовать команду <code>item</code></p>
+<pre><code>\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+% Инициализация списков
+\begin{itemize}
+\item Бублик
+\item Гвоздь
+\item Кирпич
+\item Медведь
+\end{itemize}
+\begin{enumerate}
+\item Кресло
+\item Башня
+\item Волга
+\item Ааааа
+\end{enumerate}
+\end{document}
+</code></pre>
+<p>А выглядит такой документ вот так:
+<img src="examples/6_1.png" alt="Пример 1" />
+В следующем параграфе будет рассмотрено создание таблиц с помощью списков.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Таблицы"><a class="header" href="#Таблицы">Таблицы</a></h1>
+<hr />
+<p>Можно сохранить в закладки сайт <a href="https://www.tablesgenerator.com/">TablesGenerator</a> и даже не читать этот параграф. Но довольно редко бывают случаи, когда нужно создать таблицу в LaTeX-документе, а доступа к интернету нет и приходится делать все вручную. В таких случаях, пожалуй, лучше записать таблицу на бумажке и переписать в TablesGenerator тогда, когда появится интернет и вставить в LaTeX-документ сгенерированную таблицу. Но если таблицу нужно прям срочно сделать и без интернета, знание материала из этого параграфа может пригодиться.<br />
+Таблицы обычно создаются с помощью списков. Если Вы ещё не знаете, как создавать списки, рекомендуется прочитать предыдущий параграф. Снова создадим новый LaTeX-документ по следующему шаблону:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage{english,russian}[babel]
+
+\begin{document}
+
+% Будущая таблица
+\begin{?}
+...
+\end{?}
+
+\end{document}
+</code></pre>
+<p>Для создания таблиц в LaTeX используется окружение <code>tabular</code>. Оно отличается от таких окружений, таких как <code>itemize</code> и <code>enumerate</code> тем, что ему также нужно присвоить параметр, который отвечает за количество столбцов в таблице. Этот параметр присваивается так: после <code>\begin{tabular}</code> без пробелов и переносов строк нужно ввести <code>{...}</code>, где вместо многоточия через пробел вводятся буквы <code>c</code> от слова <em>column</em>. Количество введённых букв <code>c</code> означает количество столбцов. Звучит не очень понятно, поэтому лучше разобрать это на примере: </p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+\begin{tabular}{c c c c c}
+Раз &amp; два &amp; три &amp; четыре &amp; пять \\
+One &amp; two &amp; three &amp; four &amp; five \\
+Njё &amp; dy &amp; tre &amp; katёr &amp; Pesё
+\end{tabular}
+
+\end{document}
+</code></pre>
+<p>Также нужно отметить, что для перехода к следующему столбцу используется символ <code>&amp;</code> (амперсанд), а для перехода к следующей строке -- <code>\\</code> (двойной обратный слэш). <code>\\</code> также пригодится при вводе математических записей, это будет рассмотрено в одном из следующих параграфов.<br />
+Скомпилировав код выше, получим такой документ:
+<img src="examples/7_1.png" alt="Пример 1" />
+Видно, что таблица не имеет границ. Чтобы их добавить, нужно разделить <code>c</code> в <code>{c c c c c}</code> с помощью символа <code>|</code>:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+\begin{tabular}{c|c|c|c|c}
+Раз &amp; два &amp; три &amp; четыре &amp; пять \\
+One &amp; two &amp; three &amp; four &amp; five \\
+Njё &amp; dy &amp; tre &amp; katёr &amp; Pesё
+\end{tabular}
+
+\end{document}
+</code></pre>
+<p><img src="examples/7_2.png" alt="Пример 2" />
+Как видим, столбцы разграничены, теперь нужно разграничить строки. Для этого используется команда <code>\hline</code> (от horizontal line):</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+\begin{tabular}{c|c|c|c|c}
+Раз &amp; два &amp; три &amp; четыре &amp; пять \\
+\hline
+One &amp; two &amp; three &amp; four &amp; five \\
+\hline
+Njё &amp; dy &amp; tre &amp; katёr &amp; Pesё
+\end{tabular}
+
+\end{document}
+</code></pre>
+<p><img src="examples/7_3.png" alt="Пример 3" />
+И напоследок хорошо бы добавить границы для всей таблицы. Это делается очень просто, надо всего лишь добавить линии границ в начала и концы перечисления столбцов и строк соответственно: </p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Раз &amp; два &amp; три &amp; четыре &amp; пять \\
+\hline
+One &amp; two &amp; three &amp; four &amp; five \\
+\hline
+
+% Здесь нужно добавить в конце \\, иначе выйдет ошибка 
+Njё &amp; dy &amp; tre &amp; katёr &amp; Pesё \\
+\hline
+\end{tabular}
+
+\end{document}
+</code></pre>
+<p><img src="examples/7_4.png" alt="Пример 4" />
+Как видите, теперь таблица выглядит так, как должна выглядеть таблица.<br />
+Вы также можете добавлять отступы между строками, добавляя в квадратных скобках значение отступа в дюймах, сантиметрах, пунктах, пиках и так далее:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+\begin{document}
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Раз &amp; два &amp; три &amp; четыре &amp; пять \\ [0.5cm]
+\hline
+One &amp; two &amp; three &amp; four &amp; five \\
+\hline
+
+% Здесь нужно добавить в конце \\, иначе выйдет ошибка 
+Njё &amp; dy &amp; tre &amp; katёr &amp; Pesё \\
+\hline
+\end{tabular}
+
+\end{document}
+</code></pre>
+<p><img src="examples/7_5.png" alt="Пример 5" />
+Полная таблица единиц измерения, которые здесь можно применить:</p>
+<div class="table-wrapper"><table><thead><tr><th>pt</th><th>mm</th><th>cm</th><th>in</th><th>ex</th><th>em</th><th>mu</th><th>sp</th></tr></thead><tbody>
+<tr><td>примерно 0.0138 дюймов или 0.3515 мм</td><td>мм</td><td>см</td><td>дюйм</td><td>высота маленькой буквы используемого шрифта</td><td>высота большой буквы используемого шрифта</td><td>1/18 em</td><td>низкоуровневая ед. измерения, где 1sp = 1/(65536pt)</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="Вставка-изображений"><a class="header" href="#Вставка-изображений">Вставка изображений</a></h1>
+<hr />
+<p>Для того, чтобы в документ возможно было добавить изображение, нужно импортировать пакет <code>graphicx</code>. Вставляется изображение с помощью команды <code>includegraphics</code>. Создадим документ по шаблону:</p>
+<pre><code>\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакета graphicx
+\usepackage{graphicx}
+
+\begin{document}
+Кот куда-то бежит
+\includegraphics{путь_к_картинке}
+\end{document}
+</code></pre>
+<p>Вместо путь_к_картинке нужно указать, как ни странно, путь к изображению, которое Вы хотите вставить. Например, так:</p>
+<pre><code>\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакета graphicx
+\usepackage{graphicx}
+
+\begin{document}
+Кот куда-то бежит \\
+\includegraphics{cat.jpg}
+\end{document}
+</code></pre>
+<p>Это сработает только в том случае, если файл cat.png находится в той же папке, в которой находится сам документ. В противном случае, нужно указывать либо полный путь к файлу, либо путь к файлу в подпапке (например, так: images/cat.png). Но есть способ удобнее: если Вы используете одну папку для всех изображений в документе, Вы можете указать путь к ней, добавив в начало тела документа следующую строку:</p>
+<pre><code>\graphicspath{путь_к_папке}
+</code></pre>
+<p>и использовать изображения оттуда просто вводя имя файла как в примере выше.<br />
+Если все получилось, то документ должен выглядеть примерно так:
+<img src="examples/8_1.png" alt="Пример 1" /></p>
+<h2 id="Изменение-размера-изображения"><a class="header" href="#Изменение-размера-изображения">Изменение размера изображения</a></h2>
+<p>Если фото, которое Вы добавляете в документ слишком большое, как в примере, Вы можете изменить его размер. Для этого нужно добавить параметр <code>scale</code>:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакета graphicx
+\usepackage{graphicx}
+
+\begin{document}
+Кот куда-то бежит \\
+\includegraphics[scale=0.5]{cat.jpg}
+\end{document}
+</code></pre>
+<p><img src="examples/8_2.png" alt="Пример 2" />
+Возможно, Вам хочется, чтобы все изображения имели одинаковую ширину или высоту в документе. Для этого к изображениям применяются параметры <code>width</code> и <code>height</code> (ширина и высота соответственно)</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакета graphicx
+\usepackage{graphicx}
+
+\begin{document}
+Кот куда-то бежит \\
+\includegraphics[width=6cm]{cat.jpg} \\
+Собака сидит \\
+\includegraphics[width=6cm]{dog.jpg}
+\end{document}
+</code></pre>
+<p><img src="examples/8_4.png" alt="Пример 4" /></p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакета graphicx
+\usepackage{graphicx}
+
+\begin{document}
+\includegraphics[height=3.6cm]{cat.jpg}
+\includegraphics[height=3.6cm]{dog.jpg}
+\includegraphics[height=3.6cm]{camel.jpg}
+\end{document}
+</code></pre>
+<p><img src="examples/8_5.png" alt="Пример 5" />
+Если Вам нужно обрезать фото, это можно сделать прямо в LaTeX с помощью ключевых слов <code>trim</code> и <code>clip</code>:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакета graphicx
+\usepackage{graphicx}
+
+\begin{document}
+Кот куда-то бежит \\
+\includegraphics[trim={1cm, 1cm, 2cm, 0cm},clip,scale=0.5]{cat.jpg}
+\end{document}
+</code></pre>
+<p>Наглядное сравнение обрезанного изображения (слева) и исходного (справа):
+<img src="examples/8_3.png" alt="Пример 3" /></p>
+<h2 id="Центрирование-изображений"><a class="header" href="#Центрирование-изображений">Центрирование изображений</a></h2>
+<p>Есть два способа центрировать изображение: через <code>\centering</code>, и через помещение изображения в окружение <code>center</code>. Рассмотрим оба:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакета graphicx
+\usepackage{graphicx}
+
+\begin{document}
+Кот куда-то бежит \\
+\includegraphics[scale=0.25]{cat.jpg} \\
+
+{\centering
+\includegraphics[scale=0.25]{cat.jpg}
+\par}
+
+\begin{center}
+\includegraphics[scale=0.25]{cat.jpg} \\
+\end{center}
+\end{document}
+</code></pre>
+<p><img src="examples/8_6.png" alt="Пример 6" />
+Оба способа дают один и тот же результат, поэтому можете использовать тот способ, который Вам больше нравится. </p>
+<h2 id="Расширенное-изменение-расположения-изображения"><a class="header" href="#Расширенное-изменение-расположения-изображения">Расширенное изменение расположения изображения</a></h2>
+<h3 id="Расположение-изображения-справа"><a class="header" href="#Расположение-изображения-справа">Расположение изображения справа</a></h3>
+<p>Чтобы расположить изображение в документе справа, проще всего воспользоваться пакетом <code>adjustbox</code>, добавить параметр left/right/inter/outer (inter и outer -- для двухсторонних документов). В данном случае воспользуемся параметром <code>right</code>. Кстати, Вы можете также центрировать изображение таким образом, просто добавив параметр <code>center</code>.</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакетов graphicx и adjustbox
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+
+\begin{document}
+Кот куда-то бежит \\
+\includegraphics[scale=0.25]{cat.jpg} \\
+
+\includegraphics[scale=0.25, right]{cat.jpg}
+
+\end{document}
+</code></pre>
+<p><img src="examples/8_7.png" alt="Пример 7" /></p>
+<h3 id="Среда-figure"><a class="header" href="#Среда-figure">Среда figure</a></h3>
+<p>Среда <code>figure</code> открывает множество возможностей по изменению расположения изображения. Пример:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+
+% Импорт пакетов graphicx и adjustbox
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+
+\begin{document}
+Кот куда-то бежит \\
+\begin{figure}[t]
+\includegraphics[scale=0.25]{cat.jpg} \\
+\end{figure}
+\begin{figure}[b]
+\includegraphics[scale=0.25]{cat.jpg} \\
+\end{figure}
+
+\end{document}
+</code></pre>
+<p><img src="examples/8_8.png" alt="Пример 8" />
+Видим, что изображения разместились в начале документа и в конце документа. Так получилось благодаря параметрам t -- top и b -- bottom для окружения <code>figure</code>. Полный список параметров для <code>figure</code> (можно использовать сразу несколько параметров, вводить их нужно без пробелов и знаков препинания):</p>
+<div class="table-wrapper"><table><thead><tr><th>t (top)</th><th>b (bottom)</th><th>h (here)</th><th>H</th><th>p (page)</th><th>!</th></tr></thead><tbody>
+<tr><td>располож. вверху</td><td>располож. внизу</td><td>примерно здесь (в том же месте, где пишется текст)</td><td>h!</td><td>располож. на отдельной странице</td><td>убрать &quot;примерно&quot; (параметры LaTeX для определения правильной позиции)</td></tr>
+</tbody></table>
+</div>
+<h3 id="Расположение-текста-вокруг-изображения"><a class="header" href="#Расположение-текста-вокруг-изображения">Расположение текста &quot;вокруг&quot; изображения</a></h3>
+<p>Иногда красиво вставить изображение прямо в текст, чтобы текст был расположен как бы &quot;вокруг&quot; изображения. Для реализации такой цели используется пакет <code>wrapfig</code>. Реализация такого расположения происходит так: создаётся среда <code>wrapfigure</code> с параметрами {расположение}{размер} и туда добавляется картинка:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[english,russian]{babel}
+\usepackage{lipsum} % lipsum -- генерация текста Lorem Ipsum
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\begin{document}
+\lipsum[1]
+\begin{wrapfigure}{r}{0.25\textwidth}
+\includegraphics[width=0.9\linewidth]{cat.jpg}
+\end{wrapfigure}
+\lipsum[2]
+\end{document}
+</code></pre>
+<p><img src="examples/8_9.png" alt="Пример 9" />
+Таблица с параметрами расположения изображения:</p>
+<div class="table-wrapper"><table><thead><tr><th>l (left)</th><th>r (right)</th><th>c (center)</th><th>i (inner)</th><th>o (outer)</th></tr></thead><tbody>
+<tr><td>справа</td><td>слева</td><td>по центру</td><td>см. Расположение изображения справа</td><td>см. Расположение изображения справа</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="Изменение-размера-и-расположения-элементов"><a class="header" href="#Изменение-размера-и-расположения-элементов">Изменение размера и расположения элементов</a></h1>
 
                     </main>
 
